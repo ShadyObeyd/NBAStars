@@ -40,6 +40,8 @@
         public static PlayerDto[] FilterPlayers(Player[] players, double minRating, int maxYears)
         {
             return players.Where(p => p.Rating > minRating && DateTime.Now.Year - p.PlayerSince < maxYears)
+                          .OrderByDescending(p => p.Rating)
+                          .ThenBy(p => p.Name)
                           .Select(p => new PlayerDto
                           {
                               Name = p.Name,
